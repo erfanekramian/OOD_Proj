@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="01a3887284e44a76bd47d2cc762de053" Name="Diagram1">
+        <EntityTypeShape EntityType="TestModel.Chat" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TestModel.Acccount" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TestModel.Message" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="TestModel.Personal" Width="1.5" PointX="4.875" PointY="3" />
+        <EntityTypeShape EntityType="TestModel.Group" Width="1.5" PointX="3.375" PointY="0.75" />
+        <InheritanceConnector EntityType="TestModel.Group" />
+        <InheritanceConnector EntityType="TestModel.Personal" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
