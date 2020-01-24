@@ -12,6 +12,22 @@
         <EntityTypeShape EntityType="TestModel.Group" Width="1.5" PointX="3.375" PointY="0.75" />
         <InheritanceConnector EntityType="TestModel.Group" />
         <InheritanceConnector EntityType="TestModel.Personal" />
+        <EntityTypeShape EntityType="TestModel.AdminGroup" Width="1.5" PointX="5.625" PointY="0.75" />
+        <EntityTypeShape EntityType="TestModel.GroupAccount" Width="1.5" PointX="7.625" PointY="3.75" />
+        <EntityTypeShape EntityType="TestModel.MediaFile" Width="1.5" PointX="5.375" PointY="6.5" />
+        <EntityTypeShape EntityType="TestModel.Text" Width="1.5" PointX="7.375" PointY="6.5" />
+        <AssociationConnector Association="TestModel.FK_AdminGroup_Acccount" />
+        <AssociationConnector Association="TestModel.FK_Group_Acccount" />
+        <AssociationConnector Association="TestModel.FK_GroupAccount_Acccount" />
+        <AssociationConnector Association="TestModel.FK_Message_Acccount" />
+        <AssociationConnector Association="TestModel.FK_Personal_Acccount" />
+        <AssociationConnector Association="TestModel.FK_Personal_Acccount1" />
+        <AssociationConnector Association="TestModel.FK_AdminGroup_Group" />
+        <AssociationConnector Association="TestModel.FK_Chat_Message" />
+        <AssociationConnector Association="TestModel.FK_GroupAccount_Group" />
+        <AssociationConnector Association="TestModel.FK_Message_Message" />
+        <InheritanceConnector EntityType="TestModel.Text" />
+        <InheritanceConnector EntityType="TestModel.MediaFile" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

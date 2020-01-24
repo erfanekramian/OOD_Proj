@@ -26,20 +26,29 @@ namespace SocialMessagingApp.Controllers
         {
             TestEntities testEntities = new TestEntities();
 
-            //Group group = new Group();
+            Group group = new Group();
             //group.LastSeenMessageId = 1;
             //group.Description = "aaaaa";
-            Personal personal = new Personal();
-            personal.LastSeenMessageId = 1;
-            personal.SecondAccountId = 2;
-            personal.FirstAccountId = 3;
+            group.CreatorId = 2;
+            group.Description = "Family Group";
+
+            testEntities.Chats.Add(group);
+
+            testEntities.SaveChanges();
+            List<Acccount> acccounts = new List<Acccount>();
+            for (int i = 1; i <= 3; i++)
+                acccounts.Add(testEntities.Acccounts.Find(i));
+            group.AddMember(acccounts);
+            var chat = testEntities.Chats.Find(4);
+            chat.SearchMessage("che");
+            testEntities.SaveChanges(); ;
 
             
             
             
             
-            testEntities
-            testEntities.Chats.Add(personal);
+            
+            
             
             testEntities.SaveChanges();
             

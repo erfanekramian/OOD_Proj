@@ -135,10 +135,19 @@
     <Compile Include="Models\Acccount.cs">
       <DependentUpon>Test.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminGroup.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Chat.cs">
       <DependentUpon>Test.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Group.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GroupAccount.cs">
+      <DependentUpon>Test.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MediaFile.cs">
       <DependentUpon>Test.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Message.cs">
@@ -146,6 +155,9 @@
     </Compile>
     <Compile Include="Models\Model-Custom\Chat.cs" />
     <Compile Include="Models\Model-Custom\Group.cs" />
+    <Compile Include="Models\Model-Custom\MediaFile.cs" />
+    <Compile Include="Models\Model-Custom\Message.cs" />
+    <Compile Include="Models\Model-Custom\Text.cs" />
     <Compile Include="Models\Personal.cs">
       <DependentUpon>Test.tt</DependentUpon>
     </Compile>
@@ -163,6 +175,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Test.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Text.cs">
+      <DependentUpon>Test.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

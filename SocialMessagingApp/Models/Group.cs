@@ -14,7 +14,20 @@ namespace SocialMessagingApp.Models
     
     public partial class Group : Chat
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Group()
+        {
+            this.AdminGroups = new HashSet<AdminGroup>();
+            this.GroupAccounts = new HashSet<GroupAccount>();
+        }
+    
         public string Description { get; set; }
         public Nullable<int> CreatorId { get; set; }
+    
+        public virtual Acccount Acccount { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AdminGroup> AdminGroups { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GroupAccount> GroupAccounts { get; set; }
     }
 }

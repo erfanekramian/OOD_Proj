@@ -12,12 +12,9 @@ namespace SocialMessagingApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Personal : Chat
+    public partial class MediaFile : Message
     {
-        public int FirstAccountId { get; set; }
-        public int SecondAccountId { get; set; }
-    
-        public virtual Acccount Acccount { get; set; }
-        public virtual Acccount Acccount1 { get; set; }
+        public string Caption { get; set; }
+        public Nullable<double> Size { get; set; }
     }
 }

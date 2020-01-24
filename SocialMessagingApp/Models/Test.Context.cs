@@ -28,5 +28,7 @@ namespace SocialMessagingApp.Models
         public virtual DbSet<Chat> Chats { get; set; }
         public virtual DbSet<Acccount> Acccounts { get; set; }
         public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<AdminGroup> AdminGroups { get; set; }
+        public virtual DbSet<GroupAccount> GroupAccounts { get; set; }
     }
 }

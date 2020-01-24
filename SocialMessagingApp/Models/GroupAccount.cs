@@ -12,12 +12,13 @@ namespace SocialMessagingApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Personal : Chat
+    public partial class GroupAccount
     {
-        public int FirstAccountId { get; set; }
-        public int SecondAccountId { get; set; }
+        public int Id { get; set; }
+        public int GroupId { get; set; }
+        public int AccountId { get; set; }
     
         public virtual Acccount Acccount { get; set; }
-        public virtual Acccount Acccount1 { get; set; }
+        public virtual Group Group { get; set; }
     }
 }

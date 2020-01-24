@@ -12,12 +12,27 @@ namespace SocialMessagingApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Message
+    public abstract partial class Message
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Message()
+        {
+            this.Chats = new HashSet<Chat>();
+            this.Message1 = new HashSet<Message>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> SenderId { get; set; }
         public Nullable<int> ReplyForId { get; set; }
         public Nullable<int> SentFlag { get; set; }
         public Nullable<System.DateTime> DateTime { get; set; }
+        public int ChatId { get; set; }
+    
+        public virtual Acccount Acccount { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Chat> Chats { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Message1 { get; set; }
+        public virtual Message Message2 { get; set; }
     }
 }

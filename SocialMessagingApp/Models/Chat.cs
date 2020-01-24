@@ -17,5 +17,7 @@ namespace SocialMessagingApp.Models
         public int Id { get; set; }
         public Nullable<int> MessageId { get; set; }
         public Nullable<int> LastSeenMessageId { get; set; }
+    
+        public virtual Message Message { get; set; }
     }
 }
