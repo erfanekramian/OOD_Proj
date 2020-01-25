@@ -18,11 +18,11 @@ namespace SocialMessagingApp.Models
         public Acccount()
         {
             this.AdminGroups = new HashSet<AdminGroup>();
-            this.Groups = new HashSet<Group>();
             this.GroupAccounts = new HashSet<GroupAccount>();
             this.Messages = new HashSet<Message>();
             this.Personals = new HashSet<Personal>();
             this.Personals1 = new HashSet<Personal>();
+            this.Groups = new HashSet<Group>();
         }
     
         public int Id { get; set; }
@@ -36,8 +36,6 @@ namespace SocialMessagingApp.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdminGroup> AdminGroups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Group> Groups { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GroupAccount> GroupAccounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Message> Messages { get; set; }
@@ -45,5 +43,7 @@ namespace SocialMessagingApp.Models
         public virtual ICollection<Personal> Personals { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Personal> Personals1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Group> Groups { get; set; }
     }
 }

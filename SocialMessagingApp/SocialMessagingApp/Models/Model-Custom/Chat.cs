@@ -7,7 +7,7 @@ namespace SocialMessagingApp.Models
 {
     public abstract partial class Chat
     {
-        TestEntities testEntities = new TestEntities();
+        public TestEntities testEntities = new TestEntities();
         public bool AddMessage(Message m)
         {
             m.ChatId = this.Id;
@@ -34,8 +34,8 @@ namespace SocialMessagingApp.Models
 
             }
             return false;
-
-
+            
+            
 
         }
         public List<Message> SearchMessage(string s)
@@ -52,11 +52,11 @@ namespace SocialMessagingApp.Models
 
             foreach (var item in query)
             {
-                if (item.match(s) != null)
+                if(item.match(s)!=null)
                     messages.Add(item);
             }
-
-
+                
+            
             return messages;
 
         }

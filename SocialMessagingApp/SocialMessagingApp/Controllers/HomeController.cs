@@ -22,19 +22,16 @@ namespace SocialMessagingApp.Controllers
 
             return View();
         }
-        public void addGroup()
+        public void addGroup(string Name)
         {
             TestEntities testEntities = new TestEntities();
-            testEntities.Acccounts.Find(1).delete(testEntities.Messages.Find(3), testEntities.Chats.Find(4));
-            
-            
-            
 
             //Group group = new Group();
-            ////group.LastSeenMessageId = 1;
-            ////group.Description = "aaaaa";
+            //group.LastSeenMessageId = 1;
+            //group.Description = "aaaaa";
+            //Group group = new Group();
             //group.CreatorId = 2;
-            //group.Description = "Family Group";
+            //group.Description = "Group for DA project";
 
             //testEntities.Chats.Add(group);
 
@@ -43,20 +40,31 @@ namespace SocialMessagingApp.Controllers
             //for (int i = 1; i <= 3; i++)
             //    acccounts.Add(testEntities.Acccounts.Find(i));
             //group.AddMember(acccounts);
-            //var chat = testEntities.Chats.Find(4);
-            //chat.SearchMessage("che");
-            testEntities.SaveChanges(); ;
+            //Text text = new Text();
+            //text.text1 = "salam chetori?";
+            //text.SenderId = 2;
+            //var group = testEntities.Chats.Find(4);
+            //group.AddMessage(text);
 
-            
-            
-            
-            
-            
-            
-            
+            Group group = new Group();
+            group.Description = Name;
+            group.CreatorId = 2;
+            testEntities.Chats.Add(group);
             testEntities.SaveChanges();
-            
-           
+            //personal.LastSeenMessageId = 1;
+            //personal.SecondAccountId = 2;
+            //personal.FirstAccountId = 3;
+
+
+
+
+
+
+            //testEntities.Chats.Add(personal);
+
+            //testEntities.SaveChanges();
+
+
         }
 
         public ActionResult Contact()

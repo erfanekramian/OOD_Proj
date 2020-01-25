@@ -8,26 +8,26 @@
         <EntityTypeShape EntityType="TestModel.Chat" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TestModel.Acccount" Width="1.5" PointX="0.75" PointY="3.75" />
         <EntityTypeShape EntityType="TestModel.Message" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="TestModel.Personal" Width="1.5" PointX="4.875" PointY="3" />
-        <EntityTypeShape EntityType="TestModel.Group" Width="1.5" PointX="3.375" PointY="0.75" />
-        <InheritanceConnector EntityType="TestModel.Group" />
+        <EntityTypeShape EntityType="TestModel.Personal" Width="1.5" PointX="5.875" PointY="3.375" />
         <InheritanceConnector EntityType="TestModel.Personal" />
-        <EntityTypeShape EntityType="TestModel.AdminGroup" Width="1.5" PointX="5.625" PointY="0.75" />
-        <EntityTypeShape EntityType="TestModel.GroupAccount" Width="1.5" PointX="7.625" PointY="3.75" />
-        <EntityTypeShape EntityType="TestModel.MediaFile" Width="1.5" PointX="5.375" PointY="6.5" />
-        <EntityTypeShape EntityType="TestModel.Text" Width="1.5" PointX="7.375" PointY="6.5" />
+        <EntityTypeShape EntityType="TestModel.AdminGroup" Width="1.5" PointX="6.875" PointY="0.5" />
+        <EntityTypeShape EntityType="TestModel.GroupAccount" Width="1.5" PointX="8.875" PointY="3.5" />
+        <EntityTypeShape EntityType="TestModel.MediaFile" Width="1.5" PointX="6.625" PointY="6.25" />
+        <EntityTypeShape EntityType="TestModel.Text" Width="1.5" PointX="8.625" PointY="6.25" />
         <AssociationConnector Association="TestModel.FK_AdminGroup_Acccount" />
-        <AssociationConnector Association="TestModel.FK_Group_Acccount" />
         <AssociationConnector Association="TestModel.FK_GroupAccount_Acccount" />
         <AssociationConnector Association="TestModel.FK_Message_Acccount" />
         <AssociationConnector Association="TestModel.FK_Personal_Acccount" />
         <AssociationConnector Association="TestModel.FK_Personal_Acccount1" />
-        <AssociationConnector Association="TestModel.FK_AdminGroup_Group" />
         <AssociationConnector Association="TestModel.FK_Chat_Message" />
-        <AssociationConnector Association="TestModel.FK_GroupAccount_Group" />
         <AssociationConnector Association="TestModel.FK_Message_Message" />
-        <InheritanceConnector EntityType="TestModel.Text" />
         <InheritanceConnector EntityType="TestModel.MediaFile" />
+        <InheritanceConnector EntityType="TestModel.Text" />
+        <EntityTypeShape EntityType="TestModel.Group" Width="1.5" PointX="3" PointY="8.375" />
+        <AssociationConnector Association="TestModel.FK_Group_Acccount" />
+        <AssociationConnector Association="TestModel.FK_AdminGroup_Group" />
+        <AssociationConnector Association="TestModel.FK_GroupAccount_Group" />
+        <InheritanceConnector EntityType="TestModel.Group" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

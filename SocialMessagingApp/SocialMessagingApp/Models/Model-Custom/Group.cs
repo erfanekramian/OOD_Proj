@@ -10,29 +10,29 @@ namespace SocialMessagingApp.Models
         TestEntities testEntities = new TestEntities();
         public bool AddMember(List<Acccount> acccounts)
         {
-
-            foreach (var item in acccounts)
+            
+            foreach(var item in acccounts)
             {
                 GroupAccount groupAccount = new GroupAccount();
                 groupAccount.AccountId = item.Id;
                 groupAccount.GroupId = this.Id;
                 testEntities.GroupAccounts.Add(groupAccount);
                 testEntities.SaveChanges();
-
+                
             }
             return true;
-
-
-
+            
+                
+            
         }
         public bool RemoveMember(List<Acccount> acccounts)
         {
             foreach (var item in acccounts)
             {
-
+                
                 testEntities.GroupAccounts.Remove(testEntities.GroupAccounts.Find(item.Id));
                 testEntities.SaveChanges();
-
+               
             }
             return true;
         }
@@ -62,9 +62,8 @@ namespace SocialMessagingApp.Models
         }
         public List<Acccount> SearchMember(string s)
         {
-            var query = (from groupaccount in testEntities.GroupAccounts
-                         join account in testEntities.Acccounts on groupaccount.AccountId equals account.Id
-                         where account.FirstName.Contains(s) || account.LastName.Contains(s)
+            var query = (from groupaccount in testEntities.GroupAccounts join account  in testEntities.Acccounts on groupaccount.AccountId equals account.Id
+                         where account.FirstName.Contains(s) || account.LastName.Contains(s) 
                          select account);
             List<Acccount> acccounts = new List<Acccount>();
             foreach (var item in query)

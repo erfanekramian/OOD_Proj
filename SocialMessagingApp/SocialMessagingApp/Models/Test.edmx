@@ -1,0 +1,619 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Acccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AdminGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Chat">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageId" Type="int" />
+          <Property Name="LastSeenMessageId" Type="int" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="Description" Type="nvarchar" MaxLength="200" />
+          <Property Name="CreatorId" Type="int" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GroupAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupId" Type="int" Nullable="false" />
+          <Property Name="AccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MediaFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Caption" Type="nvarchar" MaxLength="300" />
+          <Property Name="Size" Type="float" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SenderId" Type="int" />
+          <Property Name="ReplyForId" Type="int" />
+          <Property Name="SentFlag" Type="int" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="ChatId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personal">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FirstAccountId" Type="int" Nullable="false" />
+          <Property Name="SecondAccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Text">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="text" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <Association Name="FK_AdminGroup_Acccount">
+          <End Role="Acccount" Type="Self.Acccount" Multiplicity="1" />
+          <End Role="AdminGroup" Type="Self.AdminGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminGroup">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminGroup_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="AdminGroup" Type="Self.AdminGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="AdminGroup">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Message">
+          <End Role="Message" Type="Self.Message" Multiplicity="0..1" />
+          <End Role="Chat" Type="Self.Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="LastSeenMessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Group_Acccount">
+          <End Role="Acccount" Type="Self.Acccount" Multiplicity="0..1" />
+          <End Role="Group" Type="Self.Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupAccount_Acccount">
+          <End Role="Acccount" Type="Self.Acccount" Multiplicity="1" />
+          <End Role="GroupAccount" Type="Self.GroupAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupAccount">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupAccount_Group">
+          <End Role="Group" Type="Self.Group" Multiplicity="1" />
+          <End Role="GroupAccount" Type="Self.GroupAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="GroupAccount">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Acccount">
+          <End Role="Acccount" Type="Self.Acccount" Multiplicity="0..1" />
+          <End Role="Message" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Message">
+          <End Role="Message" Type="Self.Message" Multiplicity="0..1" />
+          <End Role="Message1" Type="Self.Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message1">
+              <PropertyRef Name="ReplyForId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_Acccount">
+          <End Role="Acccount" Type="Self.Acccount" Multiplicity="1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="FirstAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_Acccount1">
+          <End Role="Acccount" Type="Self.Acccount" Multiplicity="1" />
+          <End Role="Personal" Type="Self.Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="SecondAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestModelStoreContainer">
+          <EntitySet Name="Acccount" EntityType="Self.Acccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminGroup" EntityType="Self.AdminGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chat" EntityType="Self.Chat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group" EntityType="Self.Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupAccount" EntityType="Self.GroupAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MediaFile" EntityType="Self.MediaFile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Message" EntityType="Self.Message" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personal" EntityType="Self.Personal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Text" EntityType="Self.Text" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AdminGroup_Acccount" Association="Self.FK_AdminGroup_Acccount">
+            <End Role="Acccount" EntitySet="Acccount" />
+            <End Role="AdminGroup" EntitySet="AdminGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdminGroup_Group" Association="Self.FK_AdminGroup_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="AdminGroup" EntitySet="AdminGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Message" Association="Self.FK_Chat_Message">
+            <End Role="Message" EntitySet="Message" />
+            <End Role="Chat" EntitySet="Chat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Acccount" Association="Self.FK_Group_Acccount">
+            <End Role="Acccount" EntitySet="Acccount" />
+            <End Role="Group" EntitySet="Group" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupAccount_Acccount" Association="Self.FK_GroupAccount_Acccount">
+            <End Role="Acccount" EntitySet="Acccount" />
+            <End Role="GroupAccount" EntitySet="GroupAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupAccount_Group" Association="Self.FK_GroupAccount_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="GroupAccount" EntitySet="GroupAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Acccount" Association="Self.FK_Message_Acccount">
+            <End Role="Acccount" EntitySet="Acccount" />
+            <End Role="Message" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Message" Association="Self.FK_Message_Message">
+            <End Role="Message" EntitySet="Message" />
+            <End Role="Message1" EntitySet="Message" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_Acccount" Association="Self.FK_Personal_Acccount">
+            <End Role="Acccount" EntitySet="Acccount" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_Acccount1" Association="Self.FK_Personal_Acccount1">
+            <End Role="Acccount" EntitySet="Acccount" />
+            <End Role="Personal" EntitySet="Personal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Chat" Abstract="true">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageId" Type="Int32" />
+          <Property Name="LastSeenMessageId" Type="Int32" />
+          <NavigationProperty Name="Message" Relationship="TestModel.FK_Chat_Message" FromRole="Chat" ToRole="Message" />
+        </EntityType>
+        <EntityContainer Name="TestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Chats" EntityType="Self.Chat" />
+          <EntitySet Name="Acccounts" EntityType="TestModel.Acccount" />
+          <EntitySet Name="Messages" EntityType="TestModel.Message" />
+          <EntitySet Name="AdminGroups" EntityType="TestModel.AdminGroup" />
+          <EntitySet Name="GroupAccounts" EntityType="TestModel.GroupAccount" />
+          <AssociationSet Name="FK_AdminGroup_Acccount" Association="TestModel.FK_AdminGroup_Acccount">
+            <End Role="Acccount" EntitySet="Acccounts" />
+            <End Role="AdminGroup" EntitySet="AdminGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupAccount_Acccount" Association="TestModel.FK_GroupAccount_Acccount">
+            <End Role="Acccount" EntitySet="Acccounts" />
+            <End Role="GroupAccount" EntitySet="GroupAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Acccount" Association="TestModel.FK_Message_Acccount">
+            <End Role="Acccount" EntitySet="Acccounts" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_Acccount" Association="TestModel.FK_Personal_Acccount">
+            <End Role="Acccount" EntitySet="Acccounts" />
+            <End Role="Personal" EntitySet="Chats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personal_Acccount1" Association="TestModel.FK_Personal_Acccount1">
+            <End Role="Acccount" EntitySet="Acccounts" />
+            <End Role="Personal" EntitySet="Chats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chat_Message" Association="TestModel.FK_Chat_Message">
+            <End Role="Message" EntitySet="Messages" />
+            <End Role="Chat" EntitySet="Chats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Message" Association="TestModel.FK_Message_Message">
+            <End Role="Message" EntitySet="Messages" />
+            <End Role="Message1" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Group_Acccount" Association="TestModel.FK_Group_Acccount">
+            <End Role="Acccount" EntitySet="Acccounts" />
+            <End Role="Group" EntitySet="Chats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdminGroup_Group" Association="TestModel.FK_AdminGroup_Group">
+            <End Role="Group" EntitySet="Chats" />
+            <End Role="AdminGroup" EntitySet="AdminGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupAccount_Group" Association="TestModel.FK_GroupAccount_Group">
+            <End Role="Group" EntitySet="Chats" />
+            <End Role="GroupAccount" EntitySet="GroupAccounts" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Acccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AdminGroups" Relationship="TestModel.FK_AdminGroup_Acccount" FromRole="Acccount" ToRole="AdminGroup" />
+          <NavigationProperty Name="GroupAccounts" Relationship="TestModel.FK_GroupAccount_Acccount" FromRole="Acccount" ToRole="GroupAccount" />
+          <NavigationProperty Name="Messages" Relationship="TestModel.FK_Message_Acccount" FromRole="Acccount" ToRole="Message" />
+          <NavigationProperty Name="Personals" Relationship="TestModel.FK_Personal_Acccount" FromRole="Acccount" ToRole="Personal" />
+          <NavigationProperty Name="Personals1" Relationship="TestModel.FK_Personal_Acccount1" FromRole="Acccount" ToRole="Personal" />
+          <NavigationProperty Name="Groups" Relationship="TestModel.FK_Group_Acccount" FromRole="Acccount" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="Message" Abstract="true">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SenderId" Type="Int32" />
+          <Property Name="ReplyForId" Type="Int32" />
+          <Property Name="SentFlag" Type="Int32" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <Property Name="ChatId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Acccount" Relationship="TestModel.FK_Message_Acccount" FromRole="Message" ToRole="Acccount" />
+          <NavigationProperty Name="Chats" Relationship="TestModel.FK_Chat_Message" FromRole="Message" ToRole="Chat" />
+          <NavigationProperty Name="Message1" Relationship="TestModel.FK_Message_Message" FromRole="Message" ToRole="Message1" />
+          <NavigationProperty Name="Message2" Relationship="TestModel.FK_Message_Message" FromRole="Message1" ToRole="Message" />
+        </EntityType>
+        <EntityType Name="Personal" BaseType="TestModel.Chat">
+          <Property Name="FirstAccountId" Type="Int32" Nullable="false" />
+          <Property Name="SecondAccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Acccount" Relationship="TestModel.FK_Personal_Acccount" FromRole="Personal" ToRole="Acccount" />
+          <NavigationProperty Name="Acccount1" Relationship="TestModel.FK_Personal_Acccount1" FromRole="Personal" ToRole="Acccount" />
+        </EntityType>
+        <EntityType Name="AdminGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Acccount" Relationship="TestModel.FK_AdminGroup_Acccount" FromRole="AdminGroup" ToRole="Acccount" />
+          <NavigationProperty Name="Group" Relationship="TestModel.FK_AdminGroup_Group" FromRole="AdminGroup" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="GroupAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="AccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Acccount" Relationship="TestModel.FK_GroupAccount_Acccount" FromRole="GroupAccount" ToRole="Acccount" />
+          <NavigationProperty Name="Group" Relationship="TestModel.FK_GroupAccount_Group" FromRole="GroupAccount" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="MediaFile" BaseType="TestModel.Message">
+          <Property Name="Caption" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Double" />
+        </EntityType>
+        <EntityType Name="Text" BaseType="TestModel.Message">
+          <Property Name="text1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_AdminGroup_Acccount">
+          <End Type="TestModel.Acccount" Role="Acccount" Multiplicity="1" />
+          <End Type="TestModel.AdminGroup" Role="AdminGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminGroup">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupAccount_Acccount">
+          <End Type="TestModel.Acccount" Role="Acccount" Multiplicity="1" />
+          <End Type="TestModel.GroupAccount" Role="GroupAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupAccount">
+              <PropertyRef Name="AccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Acccount">
+          <End Type="TestModel.Acccount" Role="Acccount" Multiplicity="0..1" />
+          <End Type="TestModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_Acccount">
+          <End Type="TestModel.Acccount" Role="Acccount" Multiplicity="1" />
+          <End Type="TestModel.Personal" Role="Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="FirstAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personal_Acccount1">
+          <End Type="TestModel.Acccount" Role="Acccount" Multiplicity="1" />
+          <End Type="TestModel.Personal" Role="Personal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Personal">
+              <PropertyRef Name="SecondAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chat_Message">
+          <End Type="TestModel.Message" Role="Message" Multiplicity="0..1" />
+          <End Type="TestModel.Chat" Role="Chat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Chat">
+              <PropertyRef Name="LastSeenMessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Message">
+          <End Type="TestModel.Message" Role="Message" Multiplicity="0..1" />
+          <End Type="TestModel.Message" Role="Message1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Message">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Message1">
+              <PropertyRef Name="ReplyForId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Group" BaseType="TestModel.Chat">
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorId" Type="Int32" />
+          <NavigationProperty Name="Acccount" Relationship="TestModel.FK_Group_Acccount" FromRole="Group" ToRole="Acccount" />
+          <NavigationProperty Name="AdminGroups" Relationship="TestModel.FK_AdminGroup_Group" FromRole="Group" ToRole="AdminGroup" />
+          <NavigationProperty Name="GroupAccounts" Relationship="TestModel.FK_GroupAccount_Group" FromRole="Group" ToRole="GroupAccount" />
+        </EntityType>
+        <Association Name="FK_Group_Acccount">
+          <End Type="TestModel.Acccount" Role="Acccount" Multiplicity="0..1" />
+          <End Type="TestModel.Group" Role="Group" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Group">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdminGroup_Group">
+          <End Type="TestModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="TestModel.AdminGroup" Role="AdminGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AdminGroup">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupAccount_Group">
+          <End Type="TestModel.Group" Role="Group" Multiplicity="1" />
+          <End Type="TestModel.GroupAccount" Role="GroupAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GroupAccount">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestModelStoreContainer" CdmEntityContainer="TestEntities">
+          <EntitySetMapping Name="Chats">
+            <EntityTypeMapping TypeName="IsTypeOf(TestModel.Chat)">
+              <MappingFragment StoreEntitySet="Chat">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="LastSeenMessageId" ColumnName="LastSeenMessageId" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+				
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(TestModel.Personal)">
+              <MappingFragment StoreEntitySet="Personal">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstAccountId" ColumnName="FirstAccountId" />
+                <ScalarProperty Name="SecondAccountId" ColumnName="SecondAccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(TestModel.Group)">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="Id" ColumnName="GroupId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Acccounts">
+            <EntityTypeMapping TypeName="TestModel.Acccount">
+              <MappingFragment StoreEntitySet="Acccount">
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="IsTypeOf(TestModel.Message)">
+              <MappingFragment StoreEntitySet="Message">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ChatId" ColumnName="ChatId" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="ReplyForId" ColumnName="ReplyForId" />
+                <ScalarProperty Name="SentFlag" ColumnName="SentFlag" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(TestModel.MediaFile)">
+              <MappingFragment StoreEntitySet="MediaFile">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Caption" ColumnName="Caption" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(TestModel.Text)">
+              <MappingFragment StoreEntitySet="Text">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="text1" ColumnName="text" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminGroups">
+            <EntityTypeMapping TypeName="TestModel.AdminGroup">
+              <MappingFragment StoreEntitySet="AdminGroup">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupAccounts">
+            <EntityTypeMapping TypeName="TestModel.GroupAccount">
+              <MappingFragment StoreEntitySet="GroupAccount">
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

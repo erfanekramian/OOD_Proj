@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6b8d454f940c42e18f49d07249a62d5e" Name="Diagram1">
+        <EntityTypeShape EntityType="SocialMessagingAppModel.Acccount" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMessagingAppModel.AdminGroup" Width="1.5" PointX="5.25" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMessagingAppModel.Chat" Width="1.5" PointX="5.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMessagingAppModel.Group" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMessagingAppModel.GroupAccount" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMessagingAppModel.MediaFile" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMessagingAppModel.Message" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMessagingAppModel.Personal" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SocialMessagingAppModel.Text" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SocialMessagingAppModel.FK_AdminGroup_Acccount" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMessagingAppModel.FK_Group_Acccount" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMessagingAppModel.FK_GroupAccount_Acccount" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMessagingAppModel.FK_Message_Acccount" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMessagingAppModel.FK_Personal_Acccount" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMessagingAppModel.FK_Personal_Acccount1" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMessagingAppModel.FK_AdminGroup_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMessagingAppModel.FK_Chat_Message" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMessagingAppModel.FK_GroupAccount_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="SocialMessagingAppModel.FK_Message_Message" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="SocialMessagingAppModel.Group" />
+        <InheritanceConnector EntityType="SocialMessagingAppModel.Personal" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

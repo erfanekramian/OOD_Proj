@@ -15,6 +15,6 @@ namespace SocialMessagingApp.Models
             return 0;
         }
         public abstract Message match(string s);
-
+        
     }
 }
