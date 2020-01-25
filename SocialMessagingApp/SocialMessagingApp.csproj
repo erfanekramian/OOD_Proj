@@ -153,10 +153,12 @@
     <Compile Include="Models\Message.cs">
       <DependentUpon>Test.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Model-Custom\Account.cs" />
     <Compile Include="Models\Model-Custom\Chat.cs" />
     <Compile Include="Models\Model-Custom\Group.cs" />
     <Compile Include="Models\Model-Custom\MediaFile.cs" />
     <Compile Include="Models\Model-Custom\Message.cs" />
+    <Compile Include="Models\Model-Custom\SendMessageable.cs" />
     <Compile Include="Models\Model-Custom\Text.cs" />
     <Compile Include="Models\Personal.cs">
       <DependentUpon>Test.tt</DependentUpon>
